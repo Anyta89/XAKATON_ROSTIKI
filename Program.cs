@@ -1,43 +1,43 @@
-using System;
-using System.IO;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Threading;
-using System.Threading.Tasks;
-using Telegram.Bot;
-using Telegram.Bot.Types;
-using Telegram.Bot.Types.Enums;
+Ñ Ğ¸ÑĞ¿Ğ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ğ½Ğ¸ĞµĞ¼ Ğ¡Ğ¸ÑÑ‚ĞµĞ¼Ğ°;
+Ñ Ğ¸ÑĞ¿Ğ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ğ½Ğ¸ĞµĞ¼ System.IO;
+Ñ Ğ¸ÑĞ¿Ğ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ğ½Ğ¸ĞµĞ¼ System.Linq;
+Ñ Ğ¸ÑĞ¿Ğ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ğ½Ğ¸ĞµĞ¼ System.Runtime.Remoting.Messaging;
+Ñ Ğ¸ÑĞ¿Ğ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ğ½Ğ¸ĞµĞ¼ System.Threading;
+Ñ Ğ¸ÑĞ¿Ğ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ğ½Ğ¸ĞµĞ¼ System.Threading.Tasks;
+Ñ Ğ¸ÑĞ¿Ğ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ğ½Ğ¸ĞµĞ¼ Telegram.Ğ‘Ğ¾Ñ‚;
+Ñ Ğ¸ÑĞ¿Ğ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ğ½Ğ¸ĞµĞ¼ Telegram.Bot.Types;
+Ñ Ğ¸ÑĞ¿Ğ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ğ½Ğ¸ĞµĞ¼ Telegram.Bot.Types.Enums;
 
-namespace test
+Ğ¿Ñ€Ğ¾ÑÑ‚Ñ€Ğ°Ğ½ÑÑ‚Ğ²Ğ¾ Ğ¸Ğ¼ĞµĞ½ test
 {
-    internal class Program
+    Ğ²Ğ½ÑƒÑ‚Ñ€ĞµĞ½Ğ½Ğ¸Ğ¹ ÑĞ¾Ñ€Ñ‚ Program
     {
-        static void Main(string[] args)
+        ÑÑ‚Ğ°Ñ‚Ğ¸Ñ‡ĞµÑĞºĞ¸Ğ¹ Ğ¿ÑƒÑÑ‚Ğ¾Ñ‚Ğ° Main(string[] args)
         {
-            Tools.WriteLineColor("ÂÂÅÄÈÒÅ ÊËŞ× ÁÎÒÀ", ConsoleColor.Green);
-            string key = Tools.ReadLineNoNull("Ââåäèòå êëş÷:");
+            Ğ˜Ğ½ÑÑ‚Ñ€ÑƒĞ¼ĞµĞ½Ñ‚Ñ‹.WriteLineColor("Ğ’Ğ’Ğ•Ğ”Ğ˜Ğ¢Ğ• ĞšĞ›Ğ®Ğ§ Ğ‘ĞĞ¢Ğ", ConsoleColor.Green);
+            string key = Tools.ReadLineNoNull("Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ ÃªÃ«Ã¾Ã·:");
             try
             {
-                TelegramBotHelper helper = new TelegramBotHelper(key);
+                TelegramBotHelper helper = Ğ½Ğ¾Ğ²Ñ‹Ğ¹ TelegramBotHelper(key);
                 helper.GetUpdates();
             }
-            catch (Exception ex)
+            Ğ»Ğ¾Ğ²Ğ¸Ñ‚ÑŒ (Exception ex)
             {
-                Tools.WriteLineColor("ÎØÈÁÊÀ Êîä îøèáêè ::", ConsoleColor.Red);
+                Tools.WriteLineColor("ÃÃ˜ÃˆÃÃŠÃ€ ÃŠÃ®Ã¤ Ã®Ã¸Ã¨Ã¡ÃªÃ¨ ::", ConsoleColor.Red);
                 Tools.WriteLineColor(ex.Message, ConsoleColor.Green);
             }
 
-            Tools.WriteLineColor("ÏĞÎÃĞÀÌÀ ÄÀËÜØÅ ÎÒÊÀÇÀËÀÑÜ ĞÀÁÎÒÀÒÜ (íàæìèòå ëşáóş êíîïêó äëÿ çàâåğøåíèÿ ïğîãğàììû)", ConsoleColor.Yellow);
+            Tools.WriteLineColor("ÃÃÃÃƒÃÃ€ÃŒÃ€ Ã„Ã€Ã‹ÃœÃ˜Ã… ÃÃ’ÃŠÃ€Ã‡Ã€Ã‹Ã€Ã‘Ãœ ÃÃ€ÃÃÃ’Ã€Ã’Ãœ (Ã­Ã Ã¦Ã¬Ã¨Ã²Ã¥ Ã«Ã¾Ã¡Ã³Ã¾ ÃªÃ­Ã®Ã¯ÃªÃ³ Ã¤Ã«Ã¿ Ã§Ã Ã¢Ã¥Ã°Ã¸Ã¥Ã­Ã¨Ã¿ Ã¯Ã°Ã®Ã£Ã°Ã Ã¬Ã¬Ã»)", ConsoleColor.Yellow);
             Console.ReadKey();
         }
     }
 }
 
-public class TelegramBotHelper
+ĞĞ±Ñ‰ĞµÑÑ‚Ğ²ĞµĞ½Ğ½Ñ‹Ğ¹ ÑĞ¾Ñ€Ñ‚ TelegramBotHelper
 {
-    public string token;
+    ĞĞ±Ñ‰ĞµÑÑ‚Ğ²ĞµĞ½Ğ½Ñ‹Ğ¹ string token;
     TelegramBotClient bot;
-    public TelegramBotHelper(string token)
+    ĞĞ±Ñ‰ĞµÑÑ‚Ğ²ĞµĞ½Ğ½Ñ‹Ğ¹ TelegramBotHelper(string token)
     {
         this.token = token;
     }
@@ -50,12 +50,12 @@ public class TelegramBotHelper
 
         if (data1 == null && string.IsNullOrEmpty(data1.Username))
         {
-            Tools.WriteLineColor("ÎØÈÁÊÀ! ÒÅËÅÃĞÀÌ ÁÎÒ ÑÄÎÕ!!!", ConsoleColor.Red);
-            throw new InvalidOperationException("Îøèáêà òåëåãğàì áîòà. Áîò íå ñóùåñòâóåò.");
+            Tools.WriteLineColor("ÃÃ˜ÃˆÃÃŠÃ€! Ã’Ã…Ã‹Ã…ÃƒÃÃ€ÃŒ ÃÃÃ’ Ã‘Ã„ÃÃ•!!!", ConsoleColor.Red);
+            throw new InvalidOperationException("ÃÃ¸Ã¨Ã¡ÃªÃ  Ã²Ã¥Ã«Ã¥Ã£Ã°Ã Ã¬ Ã¡Ã®Ã²Ã . ÃÃ®Ã² Ã­Ã¥ Ã±Ã³Ã¹Ã¥Ã±Ã²Ã¢Ã³Ã¥Ã².");
         }
         else
         {
-            Tools.WriteLineColor($"ÒÅËÅÃĞÀÌ ÁÎÒ '{data1.Username}' ÀÊÒÈÂÅÍ", ConsoleColor.Green);
+            Tools.WriteLineColor($"Ã’Ã…Ã‹Ã…ÃƒÃÃ€ÃŒ ÃÃÃ’ '{data1.Username}' Ã€ÃŠÃ’ÃˆÃ‚Ã…Ã", ConsoleColor.Green);
         }
         while (true)
         {
@@ -69,7 +69,7 @@ public class TelegramBotHelper
                 }
                 else
                 {
-                    Tools.WriteLineColor($"{DateTime.Now} ÈÍÔÎĞÌÀÖÈÈ ÍÅ ÏÎËÓ×ÅÍÎ", ConsoleColor.Red);
+                    Tools.WriteLineColor($"{DateTime.Now} ÃˆÃÃ”ÃÃÃŒÃ€Ã–ÃˆÃˆ ÃÃ… ÃÃÃ‹Ã“Ã—Ã…ÃÃ", ConsoleColor.Red);
                 }
             }
             catch (Exception ex)
@@ -94,7 +94,7 @@ public class TelegramBotHelper
                 }
                 if (item.Message.Text == "/testcommand1")
                 {
-                    bot.SendTextMessageAsync(item.Message.Chat.Id, "Ãòà ğï");
+                    bot.SendTextMessageAsync(item.Message.Chat.Id, "ÃƒÃ²Ã  Ã°Ã¯");
                 }
 
                 bot.SendTextMessageAsync(item.Message.Chat.Id, item.Message.Text);
@@ -107,7 +107,7 @@ public class TelegramBotHelper
 
             offset = item.Id + 1;
         }
-        return $"ÂÛÏÎËÍÅÍÎ {Work} ÍÅ ÎÁĞÀÁÀÒÛÂÀÅÒÑß {NoWork}";
+        return $"Ã‚Ã›ÃÃÃ‹ÃÃ…ÃÃ {Work} ÃÃ… ÃÃÃÃ€ÃÃ€Ã’Ã›Ã‚Ã€Ã…Ã’Ã‘ÃŸ {NoWork}";
     }
 
     private const string photopath = @"c:\photo.jpg";
@@ -123,18 +123,18 @@ static class Tools
 {
     static string[] NullStringMessage =
     {
-        "òû íå ìîæåøü îñòàâèòü ıòó ñòğîêó ïóñòóş!",
-        "ÒÛ ÍÅ ÌÎÆÅØÜ ÎÑÒÀÂÈÒÜ İÒÓ ÑÒĞÎÊÓ ÏÓÑÒÓŞ!!!",
-        "ÕÂÀÒÈÒ ÄÎËÁÈÒÜ ENTER ÍÈ×ÅÃÎ ÍÅ ÍÀÏÈÑÀÂ!!!",
-        "ÒÛ ÎÁßÇÀÍ ÍÀÏÈÑÀÒÜ ÕÎÒÜ ×ÒÎÒÎ!!!",
-        "ÍÅ ÈÇÄÅÂÀÉÑß ÍÀÄ ÌÍÎÉ ÍÀÏÈØÈ ×ÒÎ ÒĞÅÁÓÅÒÑß!!!",
-        "ß ÒÅÁß ÎÒÊËŞ×Ó ÅÑËÈ ÒÛ ÍÅ ÂÏÈØÅØÜ ×ÒÎ ß ÑÊÀÇÀË Ñ×ÈÒÀŞ ÄÎ 3",
+        "Ã²Ã» Ã­Ã¥ Ã¬Ã®Ã¦Ã¥Ã¸Ã¼ Ã®Ã±Ã²Ã Ã¢Ã¨Ã²Ã¼ Ã½Ã²Ã³ Ã±Ã²Ã°Ã®ÃªÃ³ Ã¯Ã³Ã±Ã²Ã³Ã¾!",
+        "Ã’Ã› ÃÃ… ÃŒÃÃ†Ã…Ã˜Ãœ ÃÃ‘Ã’Ã€Ã‚ÃˆÃ’Ãœ ÃÃ’Ã“ Ã‘Ã’ÃÃÃŠÃ“ ÃÃ“Ã‘Ã’Ã“Ã!!!",
+        "Ã•Ã‚Ã€Ã’ÃˆÃ’ Ã„ÃÃ‹ÃÃˆÃ’Ãœ ENTER ÃÃˆÃ—Ã…ÃƒÃ ÃÃ… ÃÃ€ÃÃˆÃ‘Ã€Ã‚!!!",
+        "Ã’Ã› ÃÃÃŸÃ‡Ã€Ã ÃÃ€ÃÃˆÃ‘Ã€Ã’Ãœ Ã•ÃÃ’Ãœ Ã—Ã’ÃÃ’Ã!!!",
+        "ÃÃ… ÃˆÃ‡Ã„Ã…Ã‚Ã€Ã‰Ã‘ÃŸ ÃÃ€Ã„ ÃŒÃÃÃ‰ ÃÃ€ÃÃˆÃ˜Ãˆ Ã—Ã’Ã Ã’ÃÃ…ÃÃ“Ã…Ã’Ã‘ÃŸ!!!",
+        "ÃŸ Ã’Ã…ÃÃŸ ÃÃ’ÃŠÃ‹ÃÃ—Ã“ Ã…Ã‘Ã‹Ãˆ Ã’Ã› ÃÃ… Ã‚ÃÃˆÃ˜Ã…Ã˜Ãœ Ã—Ã’Ã ÃŸ Ã‘ÃŠÃ€Ã‡Ã€Ã‹ Ã‘Ã—ÃˆÃ’Ã€Ã Ã„Ã 3",
         "1!!!",
         "2!!!",
         "2.5!!!",
         "2.8!!!",
-        "2.9 Ñ ÍÈÒÎ×ÊÎÉ!!!!",
-        "ÄÀ ÈÄÈ ÒÛ Â ÆÎÏÓ(Â ÃÒÀ ĞÏ)"
+        "2.9 Ã‘ ÃÃˆÃ’ÃÃ—ÃŠÃÃ‰!!!!",
+        "Ã„Ã€ ÃˆÃ„Ãˆ Ã’Ã› Ã‚ Ã†ÃÃÃ“(Ã‚ ÃƒÃ’Ã€ ÃÃ)"
     };
 
     public static void WriteLineColor(string message, ConsoleColor color)
@@ -143,7 +143,7 @@ static class Tools
         Console.WriteLine(message);
         Console.ForegroundColor = ConsoleColor.White;
     }
-    public static string ReadLineNoNull(string Message = "Ââîä:")
+    public static string ReadLineNoNull(string Message = "Ã‚Ã¢Ã®Ã¤:")
     {
         string a;
         int i = 0;

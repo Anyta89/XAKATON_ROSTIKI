@@ -1,43 +1,43 @@
-с использованием Система;
-с использованием System.IO;
-с использованием System.Linq;
-с использованием System.Runtime.Remoting.Messaging;
-с использованием System.Threading;
-с использованием System.Threading.Tasks;
-с использованием Telegram.Бот;
-с использованием Telegram.Bot.Types;
-с использованием Telegram.Bot.Types.Enums;
+using System;
+using System.IO;
+using System.Linq;
+using System.Runtime.Remoting.Messaging;
+using System.Threading;
+using System.Threading.Tasks;
+using Telegram.Bot;
+using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
-пространство имен test
+namespace test
 {
-    внутренний сорт Program
+    internal class Program
     {
-        статический пустота Main(string[] args)
+        static void Main(string[] args)
         {
-            Инструменты.WriteLineColor("ВВЕДИТЕ КЛЮЧ БОТА", ConsoleColor.Green);
-            string key = Tools.ReadLineNoNull("Ââåäèòå êëþ÷:");
-            try
-            {
-                TelegramBotHelper helper = новый TelegramBotHelper(key);
+            Tools.WriteLineColor("ВВЕДИТЕ КЛЮЧ БОТА",ConsoleColor.Green);
+            string key = Tools.ReadLineNoNull("Введите ключ:");
+			try
+			{
+                TelegramBotHelper helper = new TelegramBotHelper(key);
                 helper.GetUpdates();
-            }
-            ловить (Exception ex)
-            {
-                Tools.WriteLineColor("ÎØÈÁÊÀ Êîä îøèáêè ::", ConsoleColor.Red);
-                Tools.WriteLineColor(ex.Message, ConsoleColor.Green);
-            }
+			}
+			catch (Exception ex) 
+            { 
+                Tools.WriteLineColor("ОШИБКА Код ошибки ::",ConsoleColor.Red);
+                Tools.WriteLineColor(ex.Message,ConsoleColor.Green);
+			}
 
-            Tools.WriteLineColor("ÏÐÎÃÐÀÌÀ ÄÀËÜØÅ ÎÒÊÀÇÀËÀÑÜ ÐÀÁÎÒÀÒÜ (íàæìèòå ëþáóþ êíîïêó äëÿ çàâåðøåíèÿ ïðîãðàììû)", ConsoleColor.Yellow);
+            Tools.WriteLineColor("ПРОГРАМА ДАЛЬШЕ ОТКАЗАЛАСЬ РАБОТАТЬ (нажмите любую кнопку для завершения программы)", ConsoleColor.Yellow);
             Console.ReadKey();
         }
     }
 }
 
-Общественный сорт TelegramBotHelper
+public class TelegramBotHelper
 {
-    Общественный string token;
+    public string token;
     TelegramBotClient bot;
-    Общественный TelegramBotHelper(string token)
+    public TelegramBotHelper(string token)
     {
         this.token = token;
     }
@@ -50,12 +50,12 @@
 
         if (data1 == null && string.IsNullOrEmpty(data1.Username))
         {
-            Tools.WriteLineColor("ÎØÈÁÊÀ! ÒÅËÅÃÐÀÌ ÁÎÒ ÑÄÎÕ!!!", ConsoleColor.Red);
-            throw new InvalidOperationException("Îøèáêà òåëåãðàì áîòà. Áîò íå ñóùåñòâóåò.");
+            Tools.WriteLineColor("ОШИБКА! ТЕЛЕГРАМ БОТ СДОХ!!!", ConsoleColor.Red);
+            throw new InvalidOperationException("Ошибка телеграм бота. Бот не существует.");
         }
         else
         {
-            Tools.WriteLineColor($"ÒÅËÅÃÐÀÌ ÁÎÒ '{data1.Username}' ÀÊÒÈÂÅÍ", ConsoleColor.Green);
+            Tools.WriteLineColor($"ТЕЛЕГРАМ БОТ '{data1.Username}' АКТИВЕН", ConsoleColor.Green);
         }
         while (true)
         {
@@ -69,7 +69,7 @@
                 }
                 else
                 {
-                    Tools.WriteLineColor($"{DateTime.Now} ÈÍÔÎÐÌÀÖÈÈ ÍÅ ÏÎËÓ×ÅÍÎ", ConsoleColor.Red);
+                    Tools.WriteLineColor($"{DateTime.Now} ИНФОРМАЦИИ НЕ ПОЛУЧЕНО", ConsoleColor.Red);
                 }
             }
             catch (Exception ex)
@@ -92,9 +92,10 @@
                 {
                     StikerAsync(item);
                 }
-                if (item.Message.Text == "/testcommand1")
+
+                if (item.Message.Text == "/start")
                 {
-                    bot.SendTextMessageAsync(item.Message.Chat.Id, "Ãòà ðï");
+                    bot.SendTextMessageAsync(item.Message.Chat.Id, "Здравствуй друг! я бот который умеет делать стикерпаки! для создания стикера укажи имя стикерпака и прикрепи фото и я добавлю стикер!");
                 }
 
                 bot.SendTextMessageAsync(item.Message.Chat.Id, item.Message.Text);
@@ -107,34 +108,47 @@
 
             offset = item.Id + 1;
         }
-        return $"ÂÛÏÎËÍÅÍÎ {Work} ÍÅ ÎÁÐÀÁÀÒÛÂÀÅÒÑß {NoWork}";
+        return $"ВЫПОЛНЕНО {Work} НЕ ОБРАБАТЫВАЕТСЯ {NoWork}";
     }
 
     private const string photopath = @"c:\photo.jpg";
     public async Task StikerAsync(Update item)
     {
+        Console.WriteLine(item.Message.Photo.Length);
+        foreach (var item2 in item.Message.Photo)
+        {
+            Console.WriteLine("a");
+            var fileId = item2.FileId;
+            var file = await bot.GetFileAsync(fileId);
+            var filePath = $"{file.FilePath}";
+            FileStream a = new FileStream(filePath, FileMode.Create);
 
+            await bot.DownloadFileAsync(file.FilePath, a);
+            Tools.WriteLineColor($"{file.FilePath}", ConsoleColor.Red);
+
+            a.Close();
+        }
     }
 
-
+    
 }
 
 static class Tools
 {
     static string[] NullStringMessage =
     {
-        "òû íå ìîæåøü îñòàâèòü ýòó ñòðîêó ïóñòóþ!",
-        "ÒÛ ÍÅ ÌÎÆÅØÜ ÎÑÒÀÂÈÒÜ ÝÒÓ ÑÒÐÎÊÓ ÏÓÑÒÓÞ!!!",
-        "ÕÂÀÒÈÒ ÄÎËÁÈÒÜ ENTER ÍÈ×ÅÃÎ ÍÅ ÍÀÏÈÑÀÂ!!!",
-        "ÒÛ ÎÁßÇÀÍ ÍÀÏÈÑÀÒÜ ÕÎÒÜ ×ÒÎÒÎ!!!",
-        "ÍÅ ÈÇÄÅÂÀÉÑß ÍÀÄ ÌÍÎÉ ÍÀÏÈØÈ ×ÒÎ ÒÐÅÁÓÅÒÑß!!!",
-        "ß ÒÅÁß ÎÒÊËÞ×Ó ÅÑËÈ ÒÛ ÍÅ ÂÏÈØÅØÜ ×ÒÎ ß ÑÊÀÇÀË Ñ×ÈÒÀÞ ÄÎ 3",
+        "ты не можешь оставить эту строку пустую!",
+        "ТЫ НЕ МОЖЕШЬ ОСТАВИТЬ ЭТУ СТРОКУ ПУСТУЮ!!!",
+        "ХВАТИТ ДОЛБИТЬ ENTER НИЧЕГО НЕ НАПИСАВ!!!",
+        "ТЫ ОБЯЗАН НАПИСАТЬ ХОТЬ ЧТОТО!!!",
+        "НЕ ИЗДЕВАЙСЯ НАД МНОЙ НАПИШИ ЧТО ТРЕБУЕТСЯ!!!",
+        "Я ТЕБЯ ОТКЛЮЧУ ЕСЛИ ТЫ НЕ ВПИШЕШЬ ЧТО Я СКАЗАЛ СЧИТАЮ ДО 3",
         "1!!!",
         "2!!!",
         "2.5!!!",
         "2.8!!!",
-        "2.9 Ñ ÍÈÒÎ×ÊÎÉ!!!!",
-        "ÄÀ ÈÄÈ ÒÛ Â ÆÎÏÓ(Â ÃÒÀ ÐÏ)"
+        "2.9 С НИТОЧКОЙ!!!!",
+        "ДА ИДИ ТЫ В ЖОПУ(В ГТА РП)"
     };
 
     public static void WriteLineColor(string message, ConsoleColor color)
@@ -143,7 +157,7 @@ static class Tools
         Console.WriteLine(message);
         Console.ForegroundColor = ConsoleColor.White;
     }
-    public static string ReadLineNoNull(string Message = "Ââîä:")
+    public static string ReadLineNoNull(string Message = "Ввод:")
     {
         string a;
         int i = 0;
@@ -159,7 +173,7 @@ static class Tools
             if (string.IsNullOrEmpty(a))
             {
                 Console.Clear();
-                Tools.WriteLineColor(NullStringMessage[i], ConsoleColor.Red);
+                Tools.WriteLineColor(NullStringMessage[i],ConsoleColor.Red);
             }
             i++;
         } while (string.IsNullOrEmpty(a));
@@ -167,3 +181,4 @@ static class Tools
         return a;
     }
 }
+

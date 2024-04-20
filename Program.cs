@@ -111,23 +111,9 @@ public class TelegramBotHelper
         return $"ВЫПОЛНЕНО {Work} НЕ ОБРАБАТЫВАЕТСЯ {NoWork}";
     }
 
-    private const string photopath = @"c:\photo.jpg";
     public async Task StikerAsync(Update item)
     {
-        Console.WriteLine(item.Message.Photo.Length);
-        foreach (var item2 in item.Message.Photo)
-        {
-            Console.WriteLine("a");
-            var fileId = item2.FileId;
-            var file = await bot.GetFileAsync(fileId);
-            var filePath = $"{file.FilePath}";
-            FileStream a = new FileStream(filePath, FileMode.Create);
-
-            await bot.DownloadFileAsync(file.FilePath, a);
-            Tools.WriteLineColor($"{file.FilePath}", ConsoleColor.Red);
-
-            a.Close();
-        }
+	}
     }
 
     
